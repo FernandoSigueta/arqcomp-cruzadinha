@@ -19,7 +19,6 @@ Um simples jogo de cruzadinha que contém pistas para partes da composição da 
 
 ```
 .
-├── docs/  
 │
 ├── src/
 └── README.md
