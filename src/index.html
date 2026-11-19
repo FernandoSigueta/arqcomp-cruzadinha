@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cruzadas - Arquitetura Computacional</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <h1>Cruzadinha de Arquitetura Computacional</h1>
+
+    <section class="controles">
+      <button id="btn-conferir" type="button">Conferir</button>
+      <button id="btn-reiniciar" type="button" class="secundario">Reiniciar</button>
+      <p id="contador" aria-live="polite">0 de 0 palavras</p>
+    </section>
+
+    <div class="jogo">
+      <div id="tabuleiro" role="group" aria-label="Tabuleiro da cruzadinha"></div>
+
+      <!-- Pistas numeradas -->
+      <div class="pistas">
+        <h2>Horizontais</h2>
+        <ul id="pistas-horizontais"></ul>
+
+        <h2>Verticais</h2>
+        <ul id="pistas-verticais"></ul>
+      </div>
+    </div>
+  </main>
+</body>
+<script src="script.js"></script>
+</html>
