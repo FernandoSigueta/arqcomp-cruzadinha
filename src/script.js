@@ -1,23 +1,21 @@
 const PALAVRAS = [
-  { resposta: "ROM",              linha: 0,  coluna: 4, direcao: "H", pista: "" },
-  { resposta: "REGISTRADORES",    linha: 0,  coluna: 4, direcao: "V", pista: "" },
-  { resposta: "QUADCORE",         linha: 0,  coluna: 9, direcao: "V", pista: "" },
-  { resposta: "CACHE",            linha: 1,  coluna: 0, direcao: "H", pista: "" },
-  { resposta: "MICROCONTROLADOR", linha: 1,  coluna: 7, direcao: "V", pista: "" },
-  { resposta: "UC",               linha: 3,  coluna: 6, direcao: "H", pista: "" },
-  { resposta: "FLASH",            linha: 4,  coluna: 1, direcao: "H", pista: "" },
-  { resposta: "MEMORIADEMASSA",   linha: 6,  coluna: 0, direcao: "V", pista: "" },
-  { resposta: "DUALCORE",         linha: 7,  coluna: 2, direcao: "H", pista: "" },
-  { resposta: "EEPROM",           linha: 11, coluna: 3, direcao: "H", pista: "" },
-  { resposta: "DMA",              linha: 13, coluna: 5, direcao: "H", pista: "" },
-  { resposta: "DATABUS",          linha: 13, coluna: 5, direcao: "V", pista: "" },
-  { resposta: "CPU",              linha: 14, coluna: 3, direcao: "V", pista: "" },
-  { resposta: "ULA",              linha: 16, coluna: 3, direcao: "H", pista: "" },
-  { resposta: "RAM",              linha: 16, coluna: 7, direcao: "H", pista: "" },
-  { resposta: "ADDRESSBUS",       linha: 19, coluna: 0, direcao: "H", pista: "" }
+  { resposta: "ROM",              linha: 0,  coluna: 4, direcao: "H", pista: "Predecessor da atual memória não volátil responsável pela gravação de instruções de inicialização do computador" },
+  { resposta: "REGISTRADORES",    linha: 0,  coluna: 4, direcao: "V", pista: "Menor memória contida no computador" },
+  { resposta: "QUADCORE",         linha: 0,  coluna: 9, direcao: "V", pista: "Arquitetura de processador, capaz de realizar 4 fluxos de instrução simultaneamente" },
+  { resposta: "CACHE",            linha: 1,  coluna: 0, direcao: "H", pista: "Memória do conteúdo de processamento da CPU de poucos momentos atrás" },
+  { resposta: "MICROCONTROLADOR", linha: 1,  coluna: 7, direcao: "V", pista: "Computador completo modulado em um único chip" },
+  { resposta: "UC",               linha: 3,  coluna: 6, direcao: "H", pista: "Componente que comanda a CPU" },
+  { resposta: "FLASH",            linha: 4,  coluna: 1, direcao: "H", pista: "Memória responsável por substituir o ROM na maioria dos computadores atuais" },
+  { resposta: "MEMORIADEMASSA",   linha: 6,  coluna: 0, direcao: "V", pista: "Memória capaz de armazenar grandes volumes de dados a baixo custo" },
+  { resposta: "DUALCORE",         linha: 7,  coluna: 2, direcao: "H", pista: "Arquitetura de processador, capaz de realizar 2 fluxos de instrução simultaneamente" },
+  { resposta: "EEPROM",           linha: 11, coluna: 3, direcao: "H", pista: "Memória pós desligamento do Arduíno" },
+  { resposta: "DMA",              linha: 13, coluna: 5, direcao: "H", pista: "Substituto da CPU para copiar e colar dados rapidamente" },
+  { resposta: "DATABUS",          linha: 13, coluna: 5, direcao: "V", pista: "Caminho pelo qual os dados se deslocam dentro do computador" },
+  { resposta: "CPU",              linha: 14, coluna: 3, direcao: "V", pista: "Chip principal responsável pelo processamento do computador" },
+  { resposta: "ULA",              linha: 16, coluna: 3, direcao: "H", pista: "Parte do computador que usa as portas lógicas aprendidas em aula" },
+  { resposta: "RAM",              linha: 16, coluna: 7, direcao: "H", pista: "Memória que guarda as informações atuais de processamento do computador" },
+  { resposta: "ADDRESSBUS",       linha: 19, coluna: 0, direcao: "H", pista: "Responsável por informar a localização da memória que contém o dado desejado" }
 ];
-
-const TEXTO_PISTA_VAZIA = "(escreva a pista aqui)";
 
 /* ---------- Elementos da página ---------- */
 
@@ -131,8 +129,15 @@ function construirPistas() {
   ordenadas.forEach(p => {
     const item = document.createElement("li");
     const temPista = p.pista && p.pista.trim() !== "";
-    item.innerHTML = `<strong>${p.numero}.</strong> <span class="texto${temPista ? "" : " vazio"}"></span>`;
-    item.querySelector(".texto").textContent = temPista ? p.pista : TEXTO_PISTA_VAZIA;
+
+    const num = document.createElement("strong");
+    num.textContent = `${p.numero}. `;
+
+    const texto = document.createElement("span");
+    texto.className = "texto" + (temPista ? "" : " vazio");
+    texto.textContent = temPista ? p.pista : "(sem dica)";
+
+    item.append(num, texto);
 
     item.addEventListener("click", () => {
       direcaoAtual = p.direcao;
